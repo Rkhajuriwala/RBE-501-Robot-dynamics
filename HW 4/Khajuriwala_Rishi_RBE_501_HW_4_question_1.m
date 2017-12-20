@@ -29,34 +29,73 @@ d2 = [70,0,0,100,0,0,1,2];
 d3 = [100,0,0,120,0,0,2,3];
 [qd3,vd3,ad3]= Quintic(d3(1),d3(2),d3(3),d3(4),d3(5),d3(6),d3(7),d3(8));
 %% plots
-t = linspace(0,3,100*3);
-%% plot-1 Time-position
-q(1,:) = qd1;
-q(1,101:200) = qd2;
-q(1,201:300) = qd3;
+t= linspace(0,5,100*5);
 figure
-plot(t,q);
-xlabel('time(ms)');
-ylabel(' JointAngle(deg)(Position)');
-title('Time-Position plot');
-%% Plot-2 Time-Velocity
-v(1,:) = vd1;
-v(1,101:200) = vd2;
-v(1,201:300) = vd3;
+subplot(3,1,1);
+
+plot(t,qd1);
+xlabel('Time');
+ylabel('Angle(deg)for Link 1');
+title('Position Trajectory of Link1 ');
+subplot(3,1,2)
+vd1j = diff(vd1,t)
+plot(t,vd1j);
+xlabel('Time');
+ylabel('Velocity for Link 1');
+title('Velocity Trajectory of Link1');
+subplot(3,1,3)
+ad1j = diff(ad1,t)
+plot(t,ad1j);
+xlabel('Time');
+ylabel('Acceleration for Link 1');
+title(' Acceleration Trajectory of Link1');
 figure
-plot(t,v);
-xlabel('time(ms)');
-ylabel(' Velocity)');
-title('Time-Velocity plot');
-%% Plot-3 Time-Acceleration
-a(1,:) = ad1;
-a(1,101:200) = ad2;
-a(1,201:300) = ad3;
-figure
-plot(t,a);
-xlabel('time(ms)');
-ylabel('Acceleration');
-title('Time-Acceleration plot');
+subplot(3,1,1);
+
+plot(t,qd2);
+xlabel('Time');
+ylabel('Angle for Link 2');
+title('Position Trajectory of Link2 ');
+subplot(3,1,2);
+vd2j = diff(vd2,t)
+plot(t,vd2j);
+xlabel('Time');
+ylabel('Velocity for Link 2');
+title('Velocity Trajectory of Link2');
+subplot(3,1,3);
+ad2j = diff(ad2,t)
+plot(t,ad2j);
+xlabel('Time');
+ylabel('Acceleration for Link 2');
+title(' Acceleration Trajectory of Link2');
+% t = linspace(0,3,100*3);
+% %% plot-1 Time-position
+% q(1,:) = qd1;
+% q(1,101:200) = qd2;
+% q(1,201:300) = qd3;
+% figure
+% plot(t,q);
+% xlabel('time(ms)');
+% ylabel(' JointAngle(deg)(Position)');
+% title('Time-Position plot');
+% %% Plot-2 Time-Velocity
+% v(1,:) = vd1;
+% v(1,101:200) = vd2;
+% v(1,201:300) = vd3;
+% figure
+% plot(t,v);
+% xlabel('time(ms)');
+% ylabel(' Velocity)');
+% title('Time-Velocity plot');
+% %% Plot-3 Time-Acceleration
+% a(1,:) = ad1;
+% a(1,101:200) = ad2;
+% a(1,201:300) = ad3;
+% figure
+% plot(t,a);
+% xlabel('time(ms)');
+% ylabel('Acceleration');
+% title('Time-Acceleration plot');
 %% Function --> Quintic Polynomial Trajectory Generator
 function [qd,vd,ad] = Quintic(qi,vi,aci,qf,vf,acf,ti,tf)
 t = linspace(ti,tf);
@@ -70,6 +109,7 @@ M = [1 ti ti^2 ti^3   ti^4    ti^5;
  b = [qi; vi; aci; qf; vf; acf];
  a = inv(M)* b;
  qd = a(1).*c + a(2).*t +a(3).*t.^2 + a(4).*t.^3 +a(5).*t.^4 + a(6).*t.^5;
+ 
  vd = a(2).*c +2*a(3).*t +3*a(4).*t.^2 +4*a(5).*t.^3 +5*a(6).*t.^4; 
  ad = 2*a(3).*c + 6*a(4).*t +12*a(5).*t.^2 +20*a(6).*t.^3;
 % figure

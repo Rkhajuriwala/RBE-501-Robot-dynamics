@@ -1,0 +1,157 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Khajuriwala_Rishi_RBE_501_Final_Question_1</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-12-15"><meta name="DC.source" content="Khajuriwala_Rishi_RBE_501_Final_Question_1.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h1></h1><!--introduction--><!--/introduction--><h2>Contents</h2><div><ul><li><a href="#1">Question 1 Torque equation</a></li><li><a href="#2">End effector position</a></li><li><a href="#3">Velocity</a></li><li><a href="#4">Kinetic Energy</a></li><li><a href="#5">Potential Energy</a></li><li><a href="#6">lagrangian (L)</a></li><li><a href="#7">euler- langrange equation</a></li><li><a href="#8">For the first part of the equation i.e d/dt(dL/d(dq))</a></li><li><a href="#9">for the second part of the equation i.e dL/dq</a></li><li><a href="#10">Tau</a></li><li><a href="#11">Inertia matrix M</a></li><li><a href="#12">Gravity  G</a></li><li><a href="#13">Coriolis Coupling Term</a></li></ul></div><h2 id="1">Question 1 Torque equation</h2><pre class="codeinput">syms <span class="string">m</span> <span class="string">q</span> <span class="string">l</span> <span class="string">dq</span> <span class="string">g</span> <span class="string">Dq</span> <span class="string">t</span> <span class="string">th1(t)</span> <span class="string">th2(t)</span>
+<span class="comment">% here in this question</span>
+<span class="comment">% q = joint angle</span>
+<span class="comment">% dq = q dot</span>
+<span class="comment">% Dq = q double dot</span>
+</pre><h2 id="2">End effector position</h2><p>here x(1) is actually l*cos(pi/2-q) some i have taken it as l*sinq</p><pre class="codeinput">x1 =[l*sin(q);
+     -l*cos(q);];
+</pre><h2 id="3">Velocity</h2><pre class="codeinput">v = jacobian(x1,q)* (dq);
+</pre><h2 id="4">Kinetic Energy</h2><pre class="codeinput">k = 0.5 * m * (v.' * v);
+</pre><h2 id="5">Potential Energy</h2><pre class="codeinput">p = -1* m*g*l*cos(q);
+</pre><h2 id="6">lagrangian (L)</h2><pre class="codeinput">L = simplify(k-p)
+</pre><pre class="codeoutput"> 
+L =
+ 
+(l*m*(l*dq^2 + 2*g*cos(q)))/2
+ 
+</pre><h2 id="7">euler- langrange equation</h2><p>tau =  d/dt(dL/d(dq)) -dL/dq</p><h2 id="8">For the first part of the equation i.e d/dt(dL/d(dq))</h2><pre class="codeinput">dL_dq = diff(L,dq);
+dL_dq_sub= subs(dL_dq,[q dq],[th1 diff(th1(t),t)]);
+dL1 = diff(dL_dq_sub,t);
+d_L_dq = subs(dL1,[th1 diff(th1(t),t) diff(th1(t),t,t)],[q dq Dq]);
+</pre><h2 id="9">for the second part of the equation i.e dL/dq</h2><pre class="codeinput">d_L_q = diff(L,q);
+</pre><h2 id="10">Tau</h2><pre class="codeinput">Tau = (d_L_dq - d_L_q)
+</pre><pre class="codeoutput"> 
+Tau =
+ 
+Dq*m*l^2 + g*m*sin(q)*l
+ 
+</pre><h2 id="11">Inertia matrix M</h2><pre class="codeinput">M = simplify(Tau - subs(Tau,Dq,0))/Dq
+</pre><pre class="codeoutput"> 
+M =
+ 
+l^2*m
+ 
+</pre><h2 id="12">Gravity  G</h2><pre class="codeinput">G = simplify(subs(Tau, [dq Dq],[0 0]))
+</pre><pre class="codeoutput"> 
+G =
+ 
+g*l*m*sin(q)
+ 
+</pre><h2 id="13">Coriolis Coupling Term</h2><pre class="codeinput">C =simplify( Tau- (M* (Dq).' + G))
+</pre><pre class="codeoutput"> 
+C =
+ 
+0
+ 
+</pre><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+
+%% Question 1 Torque equation 
+
+syms m q l dq g Dq t th1(t) th2(t) 
+% here in this question
+% q = joint angle
+% dq = q dot
+% Dq = q double dot
+%% End effector position
+% here x(1) is actually l*cos(pi/2-q) some i have taken it as l*sinq 
+x1 =[l*sin(q);
+     -l*cos(q);];
+
+%% Velocity
+v = jacobian(x1,q)* (dq);
+%% Kinetic Energy
+k = 0.5 * m * (v.' * v);
+%% Potential Energy
+p = -1* m*g*l*cos(q);
+%% lagrangian (L)
+L = simplify(k-p)
+%% euler- langrange equation
+% tau =  d/dt(dL/d(dq)) -dL/dq
+%% For the first part of the equation i.e d/dt(dL/d(dq))
+
+dL_dq = diff(L,dq);
+dL_dq_sub= subs(dL_dq,[q dq],[th1 diff(th1(t),t)]);
+dL1 = diff(dL_dq_sub,t);
+d_L_dq = subs(dL1,[th1 diff(th1(t),t) diff(th1(t),t,t)],[q dq Dq]);
+
+%% for the second part of the equation i.e dL/dq
+d_L_q = diff(L,q);
+%% Tau
+Tau = (d_L_dq - d_L_q)
+%% Inertia matrix M
+M = simplify(Tau - subs(Tau,Dq,0))/Dq
+%% Gravity  G
+G = simplify(subs(Tau, [dq Dq],[0 0]))
+%% Coriolis Coupling Term
+C =simplify( Tau- (M* (Dq).' + G))
+##### SOURCE END #####
+--></body></html>

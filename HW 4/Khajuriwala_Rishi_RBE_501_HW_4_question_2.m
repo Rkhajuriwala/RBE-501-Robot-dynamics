@@ -73,7 +73,7 @@ Link1=[0 x1 y1];
 Link2=[0 x2 y2];
 figure
 
-for i = 1:10:500
+for i = 1:500
 plot([0 x1(i) y1(i)],[0 x2(i) y2(i)],'-o','LineWidth',1,'MarkerSize',5,'MarkerFaceColor',[1 1 1]);
 xlabel('x');
 ylabel('y');
@@ -88,22 +88,36 @@ x2 = l1*cosd(t1) + l2*cosd(t1+t2);
 y2 = l1*sind(t1) + l2*sind(t1+t2);
 end
 %% Cubic Function
-function [qd,vd,ad] =cubic(qi, qf, vi,vf,ti,tf)
-
-t = linspace(ti,tf,100*(tf-ti));
-c = ones(size(t)); 
-A=[1,ti, ti^2,ti^3;
-    0,1,2*ti,3*ti^2;
-    1,tf, tf^2,tf^3;
-    0,1,2*tf,3*tf^2];
-
-B=[qi;vi;qf;vf];
-a=A\B;
-
-qd = a(1).*c + a(2).*t +a(3).*t.^2 + a(4).*t.^3 ;
-vd = a(2).*c +2*a(3).*t +3*a(4).*t.^2 ; 
-ad = 2*a(3).*c + 6*a(4).*t;
-end
+function [qd,vd,ad] = Quintic(qi,vi,aci,qf,vf,acf,ti,tf)
+t = linspace(ti,tf);
+c = ones(size(t));
+M = [1 ti ti^2 ti^3   ti^4    ti^5;
+     0 1  2*ti 3*ti^2 4*ti^3  5*ti^4;
+     0 0  2    6*ti   12*ti^2 20*ti^3;
+     1 tf tf^2 tf^3   tf^4    tf^5;
+     0 1  2*tf 3*tf^2 4*tf^3  5*tf^4;
+     0 0  2    6*tf   12*tf^2 20*tf^3];
+ b = [qi; vi; aci; qf; vf; acf];
+ a = inv(M)* b;
+ qd = a(1).*c + a(2).*t +a(3).*t.^2 + a(4).*t.^3 +a(5).*t.^4 + a(6).*t.^5;
+ vd = a(2).*c +2*a(3).*t +3*a(4).*t.^2 +4*a(5).*t.^3 +5*a(6).*t.^4; 
+ ad = 2*a(3).*c + 6*a(4).*t +12*a(5).*t.^2 +20*a(6).*t.^3;
+% function [qd,vd,ad] =cubic(qi, qf, vi,vf,ti,tf)
+% 
+% t = linspace(ti,tf,100*(tf-ti));
+% c = ones(size(t)); 
+% A=[1,ti, ti^2,ti^3;
+%     0,1,2*ti,3*ti^2;
+%     1,tf, tf^2,tf^3;
+%     0,1,2*tf,3*tf^2];
+% 
+% B=[qi;vi;qf;vf];
+% a=A\B;
+% 
+% qd = a(1).*c + a(2).*t +a(3).*t.^2 + a(4).*t.^3 ;
+% vd = a(2).*c +2*a(3).*t +3*a(4).*t.^2 ; 
+% ad = 2*a(3).*c + 6*a(4).*t;
+% end
  %% IK function
 function [q1,q2] = Inv_Kin(x2,y2,l1,l2)
 D = (((x2^2+y2^2)-(l1^2+l2^2))/(2*l2*l1));

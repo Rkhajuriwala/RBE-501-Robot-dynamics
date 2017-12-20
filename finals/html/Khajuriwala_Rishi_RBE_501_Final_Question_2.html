@@ -1,0 +1,330 @@
+
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+      <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+   <!--
+This HTML was auto-generated from MATLAB code.
+To make changes, update the MATLAB code and republish this document.
+      --><title>Khajuriwala_Rishi_RBE_501_Final_Question_2</title><meta name="generator" content="MATLAB 9.3"><link rel="schema.DC" href="http://purl.org/dc/elements/1.1/"><meta name="DC.date" content="2017-12-15"><meta name="DC.source" content="Khajuriwala_Rishi_RBE_501_Final_Question_2.m"><style type="text/css">
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outine:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+html { min-height:100%; margin-bottom:1px; }
+html body { height:100%; margin:0px; font-family:Arial, Helvetica, sans-serif; font-size:10px; color:#000; line-height:140%; background:#fff none; overflow-y:scroll; }
+html body td { vertical-align:top; text-align:left; }
+
+h1 { padding:0px; margin:0px 0px 25px; font-family:Arial, Helvetica, sans-serif; font-size:1.5em; color:#d55000; line-height:100%; font-weight:normal; }
+h2 { padding:0px; margin:0px 0px 8px; font-family:Arial, Helvetica, sans-serif; font-size:1.2em; color:#000; font-weight:bold; line-height:140%; border-bottom:1px solid #d6d4d4; display:block; }
+h3 { padding:0px; margin:0px 0px 5px; font-family:Arial, Helvetica, sans-serif; font-size:1.1em; color:#000; font-weight:bold; line-height:140%; }
+
+a { color:#005fce; text-decoration:none; }
+a:hover { color:#005fce; text-decoration:underline; }
+a:visited { color:#004aa0; text-decoration:none; }
+
+p { padding:0px; margin:0px 0px 20px; }
+img { padding:0px; margin:0px 0px 20px; border:none; }
+p img, pre img, tt img, li img, h1 img, h2 img { margin-bottom:0px; } 
+
+ul { padding:0px; margin:0px 0px 20px 23px; list-style:square; }
+ul li { padding:0px; margin:0px 0px 7px 0px; }
+ul li ul { padding:5px 0px 0px; margin:0px 0px 7px 23px; }
+ul li ol li { list-style:decimal; }
+ol { padding:0px; margin:0px 0px 20px 0px; list-style:decimal; }
+ol li { padding:0px; margin:0px 0px 7px 23px; list-style-type:decimal; }
+ol li ol { padding:5px 0px 0px; margin:0px 0px 7px 0px; }
+ol li ol li { list-style-type:lower-alpha; }
+ol li ul { padding-top:7px; }
+ol li ul li { list-style:square; }
+
+.content { font-size:1.2em; line-height:140%; padding: 20px; }
+
+pre, code { font-size:12px; }
+tt { font-size: 1.2em; }
+pre { margin:0px 0px 20px; }
+pre.codeinput { padding:10px; border:1px solid #d3d3d3; background:#f7f7f7; }
+pre.codeoutput { padding:10px 11px; margin:0px 0px 20px; color:#4c4c4c; }
+pre.error { color:red; }
+
+@media print { pre.codeinput, pre.codeoutput { word-wrap:break-word; width:100%; } }
+
+span.keyword { color:#0000FF }
+span.comment { color:#228B22 }
+span.string { color:#A020F0 }
+span.untermstring { color:#B20000 }
+span.syscmd { color:#B28C00 }
+
+.footer { width:auto; padding:10px 0px; margin:25px 0px 0px; border-top:1px dotted #878787; font-size:0.8em; line-height:140%; font-style:italic; color:#878787; text-align:left; float:none; }
+.footer p { margin:0px; }
+.footer a { color:#878787; }
+.footer a:hover { color:#878787; text-decoration:underline; }
+.footer a:visited { color:#878787; }
+
+table th { padding:7px 5px; text-align:left; vertical-align:middle; border: 1px solid #d6d4d4; font-weight:bold; }
+table td { padding:7px 5px; text-align:left; vertical-align:top; border:1px solid #d6d4d4; }
+
+
+
+
+
+  </style></head><body><div class="content"><h2>Contents</h2><div><ul><li><a href="#1">QUESTION 2</a></li><li><a href="#2">Calculating Trajectory</a></li><li><a href="#3">plots</a></li><li><a href="#4">Plot-1 Time-Position</a></li><li><a href="#5">Plot-2 Time-Velocity</a></li><li><a href="#6">Plot-3 Time-Acceleration</a></li><li><a href="#7">Inverse Kinematics</a></li><li><a href="#8">plotting the resultant end-effector path/trajectory i.e.track the position of the end-effector (task space) within the motion.</a></li><li><a href="#9">Fk function</a></li><li><a href="#10">Cubic Function</a></li><li><a href="#11">IK function</a></li><li><a href="#12">QUESTION3</a></li><li><a href="#13">Question3 a</a></li><li><a href="#14">Question 3 b</a></li><li><a href="#15">Question 3 C</a></li></ul></div><h2 id="1">QUESTION 2</h2><pre class="codeinput">clear <span class="string">all</span>;
+close <span class="string">all</span>;
+clc;
+<span class="comment">% Cubic Polynomial Trajectory for 3 Link arm</span>
+<span class="comment">% Given initial position of x2 =(300,450) at t= 0 and Final Position of x2=</span>
+<span class="comment">% (-300,450) at t= 5</span>
+<span class="comment">% l1=l2=300</span>
+
+<span class="comment">% given velocities  are zero</span>
+<span class="comment">% qi = initial position</span>
+<span class="comment">% vi = initial velocity</span>
+<span class="comment">% qf = final position</span>
+<span class="comment">% vf = final velocity</span>
+<span class="comment">% ti = initial time</span>
+<span class="comment">% tf = final time</span>
+<span class="comment">% qd = position trajectory</span>
+<span class="comment">% vd = velocity trajctory</span>
+<span class="comment">% ad = acceleration trajectory</span>
+</pre><h2 id="2">Calculating Trajectory</h2><p>Here, i have given the positions in the trajectory function and got the desired straight line trajectory in elbow up and down configurations</p><pre class="codeinput">vi1 = 0;
+vi2 = 0;
+vf1 = 0;
+vf2 = 0;
+qi1 = 300;
+qf1 = -300;
+qi2 = 450;
+qf2 = 450;
+d1 = [qi1,qf1,vi1,vf1,0,5];
+[qd1,vd1,ad1] = cubic(d1(1),d1(2),d1(3),d1(4),d1(5),d1(6));
+d2 = [qi2,qf2,vi2,vf2,0,5];
+[qd2,vd2,ad2] = cubic(d2(1),d2(2),d2(3),d2(4),d2(5),d2(6));
+</pre><h2 id="3">plots</h2><pre class="codeinput">t = linspace(0,5,100*5);
+<span class="comment">% to get the plots in joint space we have to multiply the qd,vd and ad with</span>
+<span class="comment">% jacobian inverse</span>
+<span class="comment">% syms t1 t2</span>
+<span class="comment">% l1 = 300;</span>
+<span class="comment">% l2 = 300;</span>
+<span class="comment">%</span>
+<span class="comment">%</span>
+<span class="comment">% x1 =[l1*cosd(t1);</span>
+<span class="comment">%      l1*sind(t1);]</span>
+<span class="comment">% x2 = [l1*cosd(t1) + l2*cosd(t1+t2);</span>
+<span class="comment">%         l1*sind(t1) + l2*sind(t1+t2);]</span>
+<span class="comment">% J2 = simplify([diff(x2,t1),diff(x2,t2)])</span>
+<span class="comment">%</span>
+<span class="comment">% % J=[J1;J2]</span>
+<span class="comment">% Ji = pinv(J2)</span>
+<span class="comment">% q = [qd1;qd2]*Ji;</span>
+<span class="comment">% v = [vd1;vd2]*Ji;</span>
+<span class="comment">% a = [ad1;ad2]*Ji;</span>
+</pre><h2 id="4">Plot-1 Time-Position</h2><pre class="codeinput">q = [qd1;qd2];
+figure
+plot(t,q);
+xlabel(<span class="string">'time(ms)'</span>);
+ylabel(<span class="string">' JointAngle(deg)(Position)'</span>);
+title(<span class="string">'Time-Position plot'</span>);
+</pre><img vspace="5" hspace="5" src="Khajuriwala_Rishi_RBE_501_Final_Question_2_01.png" alt=""> <h2 id="5">Plot-2 Time-Velocity</h2><pre class="codeinput">v = [vd1;vd2];
+figure
+plot(t,v);
+xlabel(<span class="string">'time(ms)'</span>);
+ylabel(<span class="string">' Velocity)'</span>);
+title(<span class="string">'Time-Velocity plot'</span>);
+</pre><img vspace="5" hspace="5" src="Khajuriwala_Rishi_RBE_501_Final_Question_2_02.png" alt=""> <h2 id="6">Plot-3 Time-Acceleration</h2><pre class="codeinput">a = [ad1;ad2];
+figure
+plot(t,a);
+xlabel(<span class="string">'time(ms)'</span>);
+ylabel(<span class="string">'Acceleration'</span>);
+title(<span class="string">'Time-Acceleration plot'</span>);
+</pre><img vspace="5" hspace="5" src="Khajuriwala_Rishi_RBE_501_Final_Question_2_03.png" alt=""> <h2 id="7">Inverse Kinematics</h2><p>getting the joint angles from the positions of the desired trajectory</p><pre class="codeinput">t1 = zeros(100,1);
+t2 = zeros(100,1);
+<span class="keyword">for</span> i = 1:500
+    [t1(i),t2(i)] = Inv_Kin(qd1(i),qd2(i),300,300);
+<span class="keyword">end</span>
+
+<span class="comment">% plot(qd1,qd2,t1,t2)</span>
+figure
+<span class="comment">% plot(qd2,t2)</span>
+</pre><img vspace="5" hspace="5" src="Khajuriwala_Rishi_RBE_501_Final_Question_2_04.png" alt=""> <h2 id="8">plotting the resultant end-effector path/trajectory i.e.track the position of the end-effector (task space) within the motion.</h2><pre class="codeinput">[x1,x2,y1,y2] =Forward_Kinematics(t1,t2,300,300);
+Link1=[zeros(size(x1)) x1 y1];
+Link2=[zeros(size(x2)) x2 y2];
+
+
+<span class="keyword">for</span> i = 1:5:500
+    plot([Link1(i,:)],[Link2(i,:)],<span class="string">'-o'</span>,<span class="string">'LineWidth'</span>,1,<span class="string">'MarkerSize'</span>,5,<span class="string">'MarkerFaceColor'</span>,[1 1 1]);
+    xlabel(<span class="string">'x'</span>);
+    ylabel(<span class="string">'y'</span>);
+    axis([-500 500 -500 500])
+    pause (0.01);
+<span class="keyword">end</span>
+</pre><h2 id="9">Fk function</h2><pre class="codeinput"><span class="keyword">function</span> [x1,y1,x2,y2] = Forward_Kinematics(t1,t2,l1,l2)
+x1 = l1*cosd(t1);
+y1 = l1*sind(t1);
+x2 = l1*cosd(t1) + l2*cosd(t1+t2);
+y2 = l1*sind(t1) + l2*sind(t1+t2);
+<span class="keyword">end</span>
+</pre><img vspace="5" hspace="5" src="Khajuriwala_Rishi_RBE_501_Final_Question_2_05.png" alt=""> <h2 id="10">Cubic Function</h2><pre class="codeinput"><span class="keyword">function</span> [qd,vd,ad] =cubic(qi, qf, vi,vf,ti,tf)
+
+t = linspace(ti,tf,100*(tf-ti));
+c = ones(size(t));
+A=[1,ti, ti^2,ti^3;
+    0,1,2*ti,3*ti^2;
+    1,tf, tf^2,tf^3;
+    0,1,2*tf,3*tf^2];
+
+B=[qi;vi;qf;vf];
+a=A\B;
+
+qd = a(1).*c + a(2).*t +a(3).*t.^2 + a(4).*t.^3 ;
+vd = a(2).*c +2*a(3).*t +3*a(4).*t.^2 ;
+ad = 2*a(3).*c + 6*a(4).*t;
+<span class="keyword">end</span>
+</pre><h2 id="11">IK function</h2><pre class="codeinput"><span class="keyword">function</span> [q1,q2] = Inv_Kin(x2,y2,l1,l2)
+D = (((x2^2+y2^2)-(l1^2+l2^2))/(2*l2*l1));
+q2 = atan2d(sind(acosd(D)), D);
+q1 = atan2d(y2,x2) - atan2d(l2*sind(acosd(D)),(l1+l2*(D)));
+<span class="keyword">end</span>
+</pre><h2 id="12">QUESTION3</h2><h2 id="13">Question3 a</h2><h2 id="14">Question 3 b</h2><h2 id="15">Question 3 C</h2><p class="footer"><br><a href="http://www.mathworks.com/products/matlab/">Published with MATLAB&reg; R2017b</a><br></p></div><!--
+##### SOURCE BEGIN #####
+%% QUESTION 2
+clear all;
+close all;
+clc;
+% Cubic Polynomial Trajectory for 3 Link arm
+% Given initial position of x2 =(300,450) at t= 0 and Final Position of x2=
+% (-300,450) at t= 5
+% l1=l2=300
+
+% given velocities  are zero
+% qi = initial position 
+% vi = initial velocity 
+% qf = final position
+% vf = final velocity 
+% ti = initial time 
+% tf = final time 
+% qd = position trajectory
+% vd = velocity trajctory
+% ad = acceleration trajectory
+
+%% Calculating Trajectory 
+% Here, i have given the positions in the trajectory function and got the
+% desired straight line trajectory in elbow up and down configurations
+
+vi1 = 0;
+vi2 = 0;
+vf1 = 0;
+vf2 = 0;
+qi1 = 300;
+qf1 = -300;
+qi2 = 450;
+qf2 = 450;
+d1 = [qi1,qf1,vi1,vf1,0,5];
+[qd1,vd1,ad1] = cubic(d1(1),d1(2),d1(3),d1(4),d1(5),d1(6));
+d2 = [qi2,qf2,vi2,vf2,0,5];
+[qd2,vd2,ad2] = cubic(d2(1),d2(2),d2(3),d2(4),d2(5),d2(6));
+
+%% plots
+t = linspace(0,5,100*5);
+% to get the plots in joint space we have to multiply the qd,vd and ad with
+% jacobian inverse
+% syms t1 t2 
+% l1 = 300;
+% l2 = 300;
+% 
+% 
+% x1 =[l1*cosd(t1);
+%      l1*sind(t1);]
+% x2 = [l1*cosd(t1) + l2*cosd(t1+t2);
+%         l1*sind(t1) + l2*sind(t1+t2);]
+% J2 = simplify([diff(x2,t1),diff(x2,t2)])
+% 
+% % J=[J1;J2]
+% Ji = pinv(J2)
+% q = [qd1;qd2]*Ji;
+% v = [vd1;vd2]*Ji;
+% a = [ad1;ad2]*Ji;
+%% Plot-1 Time-Position
+q = [qd1;qd2];
+figure
+plot(t,q);
+xlabel('time(ms)');
+ylabel(' JointAngle(deg)(Position)');
+title('Time-Position plot');
+%% Plot-2 Time-Velocity
+v = [vd1;vd2];
+figure
+plot(t,v);
+xlabel('time(ms)');
+ylabel(' Velocity)');
+title('Time-Velocity plot');
+%% Plot-3 Time-Acceleration
+
+a = [ad1;ad2];
+figure
+plot(t,a);
+xlabel('time(ms)');
+ylabel('Acceleration');
+title('Time-Acceleration plot');
+%% Inverse Kinematics
+% getting the joint angles from the positions of the desired trajectory
+t1 = zeros(100,1);
+t2 = zeros(100,1);
+for i = 1:500
+    [t1(i),t2(i)] = Inv_Kin(qd1(i),qd2(i),300,300);
+end
+
+% plot(qd1,qd2,t1,t2)
+figure
+% plot(qd2,t2)
+
+%% plotting the resultant end-effector path/trajectory i.e.track the position of the end-effector (task space) within the motion.
+[x1,x2,y1,y2] =Forward_Kinematics(t1,t2,300,300);
+Link1=[zeros(size(x1)) x1 y1];
+Link2=[zeros(size(x2)) x2 y2];
+
+
+for i = 1:5:500
+    plot([Link1(i,:)],[Link2(i,:)],'-o','LineWidth',1,'MarkerSize',5,'MarkerFaceColor',[1 1 1]);
+    xlabel('x');
+    ylabel('y');
+    axis([-500 500 -500 500])
+    pause (0.01);
+end
+%% Fk function
+function [x1,y1,x2,y2] = Forward_Kinematics(t1,t2,l1,l2)
+x1 = l1*cosd(t1);
+y1 = l1*sind(t1);
+x2 = l1*cosd(t1) + l2*cosd(t1+t2);
+y2 = l1*sind(t1) + l2*sind(t1+t2);
+end
+%% Cubic Function
+
+function [qd,vd,ad] =cubic(qi, qf, vi,vf,ti,tf)
+
+t = linspace(ti,tf,100*(tf-ti));
+c = ones(size(t)); 
+A=[1,ti, ti^2,ti^3;
+    0,1,2*ti,3*ti^2;
+    1,tf, tf^2,tf^3;
+    0,1,2*tf,3*tf^2];
+
+B=[qi;vi;qf;vf];
+a=A\B;
+
+qd = a(1).*c + a(2).*t +a(3).*t.^2 + a(4).*t.^3 ;
+vd = a(2).*c +2*a(3).*t +3*a(4).*t.^2 ; 
+ad = 2*a(3).*c + 6*a(4).*t;
+end
+ %% IK function
+function [q1,q2] = Inv_Kin(x2,y2,l1,l2)
+D = (((x2^2+y2^2)-(l1^2+l2^2))/(2*l2*l1));
+q2 = atan2d(sind(acosd(D)), D);
+q1 = atan2d(y2,x2) - atan2d(l2*sind(acosd(D)),(l1+l2*(D)));
+end
+%% QUESTION3
+
+%% Question3 a
+
+%% Question 3 b
+
+
+%% Question 3 C
+##### SOURCE END #####
+--></body></html>
